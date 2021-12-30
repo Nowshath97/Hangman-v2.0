@@ -150,6 +150,8 @@ function hintcard() {
 }
 
 var hintCount = 0;
+
+ 
 function hint() {
 
 
@@ -161,7 +163,22 @@ function hint() {
         const temp = hint1.split(",")
         var hint1 = (temp[hintCount]);
         document.getElementById("clue").innerHTML = 'Hint 1: ' + hint1;
+        
         //(document.getElementById('clue').innerHTML = ');
+        (function () {
+          hintalert = function() {
+            swal({
+              title: 'Hint 1:',
+              text:hint1,
+             
+            })
+            .then(
+         
+      
+            
+        )}
+          })(jQuery);
+      
       }
     }
     mistakes++;
@@ -180,6 +197,19 @@ function hint() {
         var hint2 = (temp[hintCount]);
         document.getElementById("clue").innerHTML = 'Hint 1: ' + hint1 + '<br><br>' + 'Hint 2: ' + hint2;
         // +(document.getElementById('clue2').innerHTML=);
+        (function () {
+          hintalert = function() {
+            swal({
+              title: 'Hint 2:',
+              text:hint2,
+             
+            })
+            .then(
+         
+      
+            
+        )}
+          })(jQuery);
       }
     }
     mistakes++;
@@ -198,7 +228,19 @@ function hint() {
         hint1 = (temp[hintCount-2])
         hint2 = (temp[hintCount-1])
         var hint3 = (temp[hintCount]);
+        (function () {
+          hintalert = function() {
+            swal({
+              title: 'Hint 3:',
+              text:hint3,
+             
+            })
+            .then( 
+        )}
+          })(jQuery);
         document.getElementById("clue").innerHTML = 'Hint 1: ' + hint1 + '<br><br>' + 'Hint 2: ' + hint2 + '<br><br>' + 'Hint 3: ' + hint3
+        
+       
       }
     }
     mistakes++;
@@ -206,10 +248,14 @@ function hint() {
     checkIfGameLost();
     updateHangmanPicture();
   }
+  
 
-  else{
-    document.getElementById("clue").innerHTML = '';
+  else if(hintCount>2){
+    document.getElementById("clue").onclick = function() {
+      //disable
+      this.disabled = true;
   }
+}
   hintCount++;
 
 
@@ -316,11 +362,14 @@ function shuffleteams() {
 
 function timer() {
  
-  var timeleft = 300;
+  
+  var isPaused = false;
+  
+    var timeleft = 300;
   var interval = setInterval(function () {
-    
     document.getElementById('count').innerHTML = timeleft;
     timeleft--;
+
     if (timeleft === -1) {
       clearInterval(interval);
       document.getElementById('count').innerHTML = 0;
@@ -328,14 +377,13 @@ function timer() {
       document.getElementById('wordSpotlight').innerHTML = 'The answer was: ' + answer;
       document.getElementById('keyboard').innerHTML = 'Time is up!!!';
      
-    }
-
-   
-
+    } 
+  }, 1000); 
     
-    
-  }, 1000);
-}
+  }
+ 
+
+
 
 
 
@@ -417,6 +465,24 @@ function datacard() {
       
   )}
     })(jQuery);
+
+    (function () {
+      hints = function() {
+        swal({
+          title: 'Team Change Alert!',
+          text: 'Teams have been Shuffled. Please check new teams in Team Lists. Have Fun!!!',
+         
+        })
+        .then(
+      function (){
+        congrats();
+      }
+        
+  
+        
+    )}
+      })(jQuery);
+  
 
 
     
